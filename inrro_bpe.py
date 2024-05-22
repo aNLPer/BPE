@@ -65,3 +65,32 @@ print(len(set(tokens)))
 print(f"compression ratio: {len(tokens)/len(ids)}") # 同一片文档，uft-8编码后的长度是bpe算法压缩后长度的1.5倍
 
 
+# decode ids->text
+vocab = {idx: bytes([idx]) for idx in range(256)}
+for (p0, p1), idx in merge_rec.items():
+    vocab[idx] = vocab[p0]+vocab[p1]
+    
+def decode(ids):
+    # 将list of integers (tokens) 解码成为string
+    tokens = b"".join([vocab[idx] for idx in ids])
+    text = tokens.decode("utf-8", errors="replace")
+    return text
+
+print(decode(ids))
+
+# encode
+def encode(text):
+    # 将string编码成为list of integers (tokens)
+    tokens = list(text.encode("utf-8"))
+    while len(tokens)>=2:
+        stats = get_stats(tokens)
+        pair = min(stats, key=lambda p: merge_rec.get(p, float("inf")))
+        if pair not in merge_rec:
+            break # 不需要merge
+        idx = merge_rec[pair]
+        tokens = merge(tokens, pair, idx)
+    return tokens
+            
+
+test_text = "Python3 中明确区分字符串类型 (str) 和 字节序列类型 (bytes)，也称为字节流。内存，磁盘中均是以字节流的形式保存数据，它由一个一个的字节 （byte，8bit）顺序构成，然而人们并不习惯直接使用字节，既读不懂，操作起来也很麻烦，人们容易看懂的是字符串。"
+print(decode(encode(test_text)))
