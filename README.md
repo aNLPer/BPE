@@ -30,8 +30,6 @@ BPE算法是一个迭代算法，首先对文本进行编码，比如利用utf-8
 [karpathy's code](https://github.com/karpathy/minbpe)
 
 
-## Sub
-
 ### WordPiece
 
 
