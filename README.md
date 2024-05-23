@@ -2,7 +2,7 @@
 
 Tokenization in simple words is the process of splitting a phrase, sentence, paragraph, one or multiple text documents into smaller units. Each of these smaller units is called a token. Now, these tokens can be anything — a word, a subword, or even a character. Different algorithms follow different processes in performing tokenization but the below given example will give you a basic idea about the difference between these three.
 
-Word-based 算法将apples和apple看作不同的token这种策略将使得词汇表非常的庞大；Character-based的算法将a,b,c...视为一个token，虽然词汇表规模大大减小，但损失了word的语义信息。从大模型角度考虑，Character-based 虽然词减少了汇表的大小，但是输入的sequence长度增加了（一个word需要多个表示向量），那么attention的计算量增加了，这对于LLM是不可接受的；subword在两者之间取折中，例如常用的BPE算法迭代的将当前corpus中频率最高的byte pair组成新的token，这个过程会增加词汇表的大小，但是会降低输入sequence的长度。另一方面其实，tokenization可以看作一个文本压缩算法，但是既要考虑压缩效率，又要考虑到模型的训练。
+Word-based 算法将apples和apple看作不同的token这种策略将使得词汇表非常的庞大；Character-based的算法将a,b,c...视为一个token，虽然词汇表规模大大减小，但损失了word的语义信息。从大模型角度考虑，Character-based 虽然词减少了汇表的大小，但是输入的sequence长度增加了（一个word需要多个表示向量），那么attention的计算量增加了，这对于LLM是不可接受的；subword在两者之间取折中，例如常用的BPE算法迭代的将频率最高的byte pair组成新的token，这个过程会增加词汇表的大小，但是会降低输入sequence的长度。另一方面其实，tokenization可以看作一个文本压缩算法，但是既要考虑压缩效率，又要考虑到模型的训练。
 
 ## Subword-based
 
@@ -14,7 +14,7 @@ The subword-based tokenization algorithms uses the following principles.
 
 ### Byte-Pair Encoding（BPE）
 
-BPE算法是一个迭代算法，首先对文本进行编码，比如利用utf-8将每个字符编码为由1\~4个byte的字节流，每个byte的范围为0\~255，然后每次迭代将，出现频率最高的两个byte（byte pair）合并赋予新的编号（大于255），直到满足终止条件（迭代次数，词汇表大小）。具体实现参考`intro_bpe.py`
+BPE算法是一个迭代算法，首先对文本进行编码，比如利用utf-8将每个字符编码为由1\~4个byte的字节流，每个byte的范围为0\~255，然后，每次迭代，首先统计训练数据集中相邻byte（byte pair）的出现频率，将出现频率最高的两个byte合并赋予新的编号（大于255）并更新训练集，直到满足终止条件（迭代次数，词汇表大小）。具体实现参考`intro_bpe.py`
 
 **总结：**
 
