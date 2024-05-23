@@ -14,7 +14,7 @@ The subword-based tokenization algorithms uses the following principles.
 
 ### Byte-Pair Encoding（BPE）
 
-BPE算法是一个迭代算法，首先对文本进行编码，比如利用utf-8将每个字符编码为由1~4个byte的字节流，每个byte的范围为0~255，然后每次迭代将，出现频率最高的两个byte（byte pair）合并赋予新的编号（大于255），直到满足终止条件（迭代次数，词汇表大小）。具体实现参考`intro_bpe.py`
+BPE算法是一个迭代算法，首先对文本进行编码，比如利用utf-8将每个字符编码为由1\~4个byte的字节流，每个byte的范围为0\~255，然后每次迭代将，出现频率最高的两个byte（byte pair）合并赋予新的编号（大于255），直到满足终止条件（迭代次数，词汇表大小）。具体实现参考`intro_bpe.py`
 
 **总结：**
 
