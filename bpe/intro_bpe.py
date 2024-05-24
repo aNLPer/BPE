@@ -3,6 +3,7 @@ text = """在Python中处理文本数据是使用str对象，也称为字符串�
 The tokens with 0 frequency count have been removed from the table. We can now see that the total token count is 11, which is less than our initial count of 12. This is a small corpus but in practice, the size reduces a lot. This list of 11 tokens will serve as our vocabulary.
 You must have also noticed that when we add a token, either our count increases or decreases or remains the same. In practice, the token count first increases and then decreases. The stopping criteria can be either the count of the tokens or the number of iterations. We choose this stopping criterion such that our dataset can be broken down into tokens in the most efficient way.
 """
+print("理解数据：")
 print("-------")
 print("text:")
 print(text)

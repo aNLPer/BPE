@@ -14,7 +14,9 @@ The subword-based tokenization algorithms uses the following principles.
 
 ### Byte-Pair Encoding（BPE）
 
-BPE算法是一个迭代算法，首先对文本进行编码，比如利用utf-8将每个字符编码为由1\~4个byte的字节流，每个byte的范围为0\~255，然后，每次迭代，首先统计训练数据集中相邻byte（byte pair）的出现频率，将出现频率最高的两个byte合并赋予新的编号（大于255）并更新训练集，直到满足终止条件（迭代次数，词汇表大小）。具体实现参考`intro_bpe.py`。通过BPE算法对utf-8编码进一步压缩，每次迭代的词汇表变大了，但是编码数据集需要的token变少了（序列变短了）。
+BPE算法是一个迭代算法，首先对文本进行编码，比如利用utf-8将每个字符编码为由1\~4个byte的字节流，每个byte的范围为0\~255，然后，每次迭代，首先统计训练数据集中相邻byte（byte pair）的出现频率，将出现频率最高的两个byte合并赋予新的编号（大于255）并更新训练集，直到满足终止条件（迭代次数，词汇表大小）。通过BPE算法对utf-8编码进一步压缩，每次迭代的词汇表变大了，但是编码数据集需要的token变少了（序列变短了）。
+
+`./bpe` 利用BPE算法在小说《笑傲江湖》和泰勒斯威夫特的英文维基百科数据集上训练了一个中英文 Tokenizer。
 
 **总结：**
 
@@ -23,7 +25,6 @@ BPE算法是一个迭代算法，首先对文本进行编码，比如利用utf-8
 **参考：**
 
 [Word, Subword, and Character-Based Tokenization: Know the Difference](https://towardsdatascience.com/word-subword-and-character-based-tokenization-know-the-difference-ea0976b64e17)
-
 
 [Byte-Pair Encoding: Subword-based tokenization algorithm](https://towardsdatascience.com/byte-pair-encoding-subword-based-tokenization-algorithm-77828a70bee0)
 
